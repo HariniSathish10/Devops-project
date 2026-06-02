@@ -1,6 +1,6 @@
 pipeline {
     agent any
-}
+
     tools {
         jdk 'jdk-21'
         maven 'Maven'
@@ -23,27 +23,31 @@ pipeline {
         stage('Verify Workspace') {
             steps {
                 bat 'dir'
+                bat 'dir backend'
             }
         }
 
         stage('Build Backend') {
-    steps {
-        dir('backend') {
-            bat 'mvn clean package -DskipTests'
-        }
-    }
-}
-
-        stage('Run Tests') {
             steps {
-                bat 'mvn test'
+                dir('backend') {
+                    bat 'mvn clean package -DskipTests'
+                }
             }
         }
 
-           stage('Build Docker Image') {
+        stage('Run Tests') {
+            steps {
+                dir('backend') {
+                    bat 'mvn test'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 dir('backend') {
                     bat 'docker build -t %IMAGE_NAME% .'
+                }
             }
         }
 
@@ -83,7 +87,7 @@ pipeline {
 
     post {
         success {
-            echo "✅ Pipeline Success - Backend running on port 5000"
+            echo "✅ Pipeline Success"
         }
         failure {
             echo "❌ Pipeline Failed"
