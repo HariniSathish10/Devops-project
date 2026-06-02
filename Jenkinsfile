@@ -89,7 +89,6 @@ stage('Build Docker Image') {
             echo "❌ Pipeline failed"
         }
     }
-}
 stage('Build Backend') {
     steps {
         dir('backend') {
