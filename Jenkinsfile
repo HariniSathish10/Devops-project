@@ -9,7 +9,7 @@ pipeline {
     environment {
         IMAGE_NAME = "devops-project-app"
         CONTAINER_NAME = "devops-app"
-        DOCKER_HUB = "your-dockerhub-username"
+        DOCKER_HUB = "harinisathish10"
     }
 
     stages {
