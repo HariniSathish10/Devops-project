@@ -64,7 +64,6 @@ stage('Build Docker Image') {
             docker push %USER%/devops-project-app:latest
             '''
         }
-    }
 }
             }
         }
