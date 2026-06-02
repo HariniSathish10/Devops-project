@@ -1,8 +1,10 @@
+pipeline {
+    agent any
+
     tools {
         jdk 'jdk-21'
         maven 'Maven'
-   pipeline {
-    agent any
+    }
 
     environment {
         IMAGE_NAME = "devops-project-app"
@@ -14,7 +16,6 @@
 
         stage('Checkout') {
             steps {
-                // IMPORTANT: avoid master/main issues
                 checkout scm
             }
         }
@@ -27,7 +28,6 @@
 
         stage('Build Backend') {
             steps {
-                // If pom.xml is in root
                 bat 'mvn clean package -DskipTests'
             }
         }
@@ -87,4 +87,3 @@
         }
     }
 }
-    }
