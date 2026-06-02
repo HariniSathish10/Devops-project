@@ -22,19 +22,19 @@ pipeline {
 
         stage('Build Backend') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                bat 'mvn clean package -DskipTests'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME .'
+                bat 'docker build -t $IMAGE_NAME .'
             }
         }
 
@@ -44,14 +44,14 @@ pipeline {
                     usernameVariable: 'USERNAME',
                     passwordVariable: 'PASSWORD')]) {
 
-                    sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
+                    bat 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
                 }
             }
         }
 
         stage('Push Image') {
             steps {
-                sh '''
+                bat '''
                 docker tag $IMAGE_NAME $DOCKER_HUB/$IMAGE_NAME:latest
                 docker push $DOCKER_HUB/$IMAGE_NAME:latest
                 '''
@@ -60,7 +60,7 @@ pipeline {
 
         stage('Deploy Backend') {
             steps {
-                sh '''
+                bat '''
                 docker stop backend || true
                 docker rm backend || true
 
