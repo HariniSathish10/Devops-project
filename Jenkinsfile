@@ -65,13 +65,13 @@ pipeline {
     }
 }
         stage('Tag & Push Image') {
-            steps {
-                bat '''
-                docker tag %IMAGE_NAME% %DOCKER_HUB%/%IMAGE_NAME%:latest
-                docker push %DOCKER_HUB%/%IMAGE_NAME%:latest
-                '''
-            }
-        }
+    steps {
+        bat """
+        docker tag %IMAGE_NAME% %DOCKER_HUB%/%IMAGE_NAME%:latest
+        docker push %DOCKER_HUB%/%IMAGE_NAME%:latest
+        """
+    }
+}
 
         stage('Deploy Backend') {
             steps {
