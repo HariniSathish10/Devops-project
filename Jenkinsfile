@@ -51,18 +51,19 @@ pipeline {
             }
         }
 
-        stage('Docker Login') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'USERNAME',
-                    passwordVariable: 'PASSWORD'
-                )]) {
-                    bat 'echo %PASSWORD% | docker login -u %USERNAME% --password-stdin'
-                }
-            }
+     stage('Docker Login') {
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: 'dockerhub-creds',
+            usernameVariable: 'USERNAME',
+            passwordVariable: 'PASSWORD'
+        )]) {
+            bat """
+            docker login -u %USERNAME% -p %PASSWORD%
+            """
         }
-
+    }
+}
         stage('Tag & Push Image') {
             steps {
                 bat '''
