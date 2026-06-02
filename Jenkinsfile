@@ -19,24 +19,30 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/HariniSathish10/Devops-project.git'
             }
         }
-
         stage('Build Backend') {
-            steps {
-                bat 'mvn clean package -DskipTests'
-            }
+    steps {
+        dir('backend') {
+            bat 'mvn clean package -DskipTests'
         }
+    }
+}
 
-        stage('Run Tests') {
-            steps {
-                bat 'mvn test'
-            }
+stage('Run Tests') {
+    steps {
+        dir('backend') {
+            bat 'mvn test'
         }
+    }
+}
 
-        stage('Build Docker Image') {
-            steps {
-                bat 'docker build -t $IMAGE_NAME .'
-            }
+stage('Build Docker Image') {
+    steps {
+        dir('backend') {
+            bat 'docker build -t devops-project-app .'
         }
+    }
+}
+       
 
         stage('Docker Login') {
             steps {
