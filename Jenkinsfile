@@ -80,3 +80,10 @@ pipeline {
         }
     }
 }
+stage('Build Backend') {
+    steps {
+        dir('backend') {
+            bat 'mvn clean package -DskipTests'
+        }
+    }
+}
