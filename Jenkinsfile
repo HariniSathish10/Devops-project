@@ -56,11 +56,16 @@ stage('Build Docker Image') {
         }
 
         stage('Push Image') {
-            steps {
-                bat '''
-                docker tag $IMAGE_NAME $DOCKER_HUB/$IMAGE_NAME:latest
-                docker push $DOCKER_HUB/$IMAGE_NAME:latest
-                '''
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+            bat '''
+            docker login -u %USER% -p %PASS%
+            docker tag devops-project-app %USER%/devops-project-app:latest
+            docker push %USER%/devops-project-app:latest
+            '''
+        }
+    }
+}
             }
         }
 
