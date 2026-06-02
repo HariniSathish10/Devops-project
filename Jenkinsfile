@@ -40,9 +40,10 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+           stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %IMAGE_NAME% .'
+                dir('backend') {
+                    bat 'docker build -t %IMAGE_NAME% .'
             }
         }
 
