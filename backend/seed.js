@@ -118,7 +118,7 @@ const sampleProducts = [
     numReviews: 445,
     stock: 200,
     features: ['SPF 45', '24hr Wear', 'Serum Enriched', 'Matte Finish'],
-    specifications: new Map([['Shade', 'Multiple'], 'Coverage', 'Medium to Full', ['Finish', 'Matte'], ['Weight', '30ml']]),
+    specifications: new Map([['Shade', 'Multiple'], ['Coverage', 'Medium to Full'], ['Finish', 'Matte'], ['Weight', '30ml']]),
     isFeatured: true,
     tags: ['makeup', 'foundation', 'skincare']
   },
@@ -134,7 +134,7 @@ const sampleProducts = [
     rating: 4.5,
     numReviews: 178,
     stock: 80,
-    features: ['Natural Ingredients', ['Complete Kit'], 'Ayurvedic Formula', 'Luxury Packaging'],
+    features: ['Natural Ingredients', 'Complete Kit', 'Ayurvedic Formula', 'Luxury Packaging'],
     specifications: new Map([['Type', 'Facial Kit'], ['Skin Type', 'All'], ['Products', '4'], ['Weight', '200g']]),
     isFeatured: true,
     tags: ['skincare', 'ayurvedic', 'luxury']
@@ -321,7 +321,7 @@ const sampleProducts = [
     rating: 4.2,
     numReviews: 345,
     stock: 180,
-    features: ['Microfiber Cloths', ['Cleaning Brushes'], 'Eco-Friendly', 'Multi-Surface'],
+    features: ['Microfiber Cloths', 'Cleaning Brushes', 'Eco-Friendly', 'Multi-Surface'],
     specifications: new Map([['Items', '12'], ['Type', 'Cleaning Kit'], ['Material', 'Microfiber'], ['Warranty', '1 Year']]),
     isFeatured: false,
     tags: ['cleaning', 'home', 'kit']
