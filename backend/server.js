@@ -2,14 +2,6 @@ const express = require('express');
 const app = express();
 
 const path = require("path");
-
-// Serve frontend build
-app.use(express.static("build"));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve("build/index.html"));
-});
-
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -34,5 +26,16 @@ app.use('/api/orders', require('./routes/orders'));
 app.use('/api/wishlist', require('./routes/wishlist'));
 app.use('/api/search', require('./routes/search'));
 
+// ===============================
+// FRONTEND SERVE (MUST BE LAST)
+// ===============================
+
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
+});
+
+// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
