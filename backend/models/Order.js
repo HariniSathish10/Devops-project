@@ -62,10 +62,37 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
   orderStatus: {
-    type: String,
-    enum: ['Processing', 'Shipped', 'Delivered', 'Cancelled'],
-    default: 'Processing'
-  },
+  type: String,
+  enum: [
+    'Order Placed',
+    'Payment Confirmed',
+    'Packed',
+    'Shipped',
+    'Out For Delivery',
+    'Delivered',
+    'Cancelled'
+  ],
+  default: 'Order Placed'
+},
+
+trackingNumber: {
+  type: String,
+  default: ''
+},
+
+estimatedDeliveryDate: {
+  type: Date
+},
+
+statusHistory: [
+  {
+    status: String,
+    date: {
+      type: Date,
+      default: Date.now
+    }
+  }
+],
   isDelivered: {
     type: Boolean,
     default: false
@@ -79,6 +106,23 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
+});
+orderSchema.pre('save', function (next) {
+  if (this.isNew) {
+    this.statusHistory.push({
+      status: 'Order Placed',
+      date: new Date()
+    });
+
+    this.trackingNumber =
+      'TRK' +
+      Math.random().toString(36).substring(2, 10).toUpperCase();
+
+    this.estimatedDeliveryDate =
+      new Date(Date.now() + 5 * 24 * 60 * 60 * 1000);
+  }
+
+  next();
 });
 
 module.exports = mongoose.model('Order', orderSchema);
