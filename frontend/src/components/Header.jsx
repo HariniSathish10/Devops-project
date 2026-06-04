@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, Search, User, Heart, Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -10,9 +11,9 @@ const Header = () => {
   const { user, logout } = useAuth();
   const { cartItemsCount, setCartOpen } = useCart();
   const { wishlistCount } = useWishlist();
+  const { darkMode, setDarkMode } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const location = useLocation();
 
   const categories = [
@@ -26,7 +27,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors">
       {/* Top Bar */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-500 text-white py-2">
         <div className="container mx-auto px-4 flex justify-between items-center text-sm">
@@ -43,7 +44,7 @@ const Header = () => {
             <div className="w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-500 rounded-lg flex items-center justify-center">
               <ShoppingCart className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold text-gradient">ShopIndia</span>
+            <span className="text-2xl font-bold text-gradient dark:text-white">
           </Link>
 
           {/* Search Bar */}
@@ -52,7 +53,7 @@ const Header = () => {
               <input
                 type="text"
                 placeholder="Search for products, brands and more..."
-                className="w-full px-4 py-3 pl-12 border-2 border-gray-200 rounded-full focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                className="w-full px-4 py-3 pl-12 border-2 border-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-700 rounded-full"
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             </div>
