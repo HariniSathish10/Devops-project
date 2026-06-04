@@ -1,3 +1,4 @@
+import { ThemeProvider } from './context/ThemeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
@@ -16,6 +17,7 @@ import Orders from './pages/Orders';
 
 function App() {
   return (
+  <ThemeProvider>
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
@@ -41,6 +43,7 @@ function App() {
         </WishlistProvider>
       </CartProvider>
     </AuthProvider>
+    </ThemeProvider>
   );
 }
 
