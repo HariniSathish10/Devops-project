@@ -1,6 +1,15 @@
 const express = require('express');
 const app = express();
 
+const path = require("path");
+
+// Serve frontend build
+app.use(express.static("build"));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve("build/index.html"));
+});
+
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
