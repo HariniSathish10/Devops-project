@@ -11,7 +11,7 @@ const Header = () => {
   const { user, logout } = useAuth();
   const { cartItemsCount, setCartOpen } = useCart();
   const { wishlistCount } = useWishlist();
-  const { darkMode, setDarkMode } = useTheme();
+  const { darkMode, toggleDarkMode } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
