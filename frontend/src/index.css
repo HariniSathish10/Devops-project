@@ -17,10 +17,9 @@
     @apply px-6 py-3 bg-white text-gray-700 border-2 border-gray-200 rounded-lg font-semibold hover:border-primary-500 hover:text-primary-600 transition-all duration-300;
   }
   
-  .card {
-    @apply bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1;
-  }
-  
+.card {
+  @apply bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1;
+}  
   .input-field {
     @apply w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all duration-300;
   }
