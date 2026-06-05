@@ -66,12 +66,11 @@ const Header = () => {
             >
               <Search className="w-6 h-6" />
             </button>
-
             <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            onClick={toggleDarkMode}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
             >
-              {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+            {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
             </button>
 
             <Link to="/wishlist" className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
