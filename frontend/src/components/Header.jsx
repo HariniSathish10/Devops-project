@@ -11,11 +11,10 @@ const Header = () => {
   const { user, logout } = useAuth();
   const { cartItemsCount, setCartOpen } = useCart();
   const { wishlistCount } = useWishlist();
-  const { darkMode, toggleDarkMode } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
-
+  const { darkMode, toggleDarkMode } = useTheme();
   const categories = [
     { name: 'Mobiles', path: '/products?category=Mobiles' },
     { name: 'Electronics', path: '/products?category=Electronics' },
