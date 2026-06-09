@@ -39,6 +39,7 @@ router.post('/', verifyToken, async (req, res) => {
       taxPrice,
       totalPrice
     });
+    await sendOrderAlert(order);
     
     res.status(201).json(order);
   } catch (error) {
