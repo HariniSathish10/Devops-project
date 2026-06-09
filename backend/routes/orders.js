@@ -39,7 +39,12 @@ router.post('/', verifyToken, async (req, res) => {
       taxPrice,
       totalPrice
     });
-    await sendOrderAlert(order);
+    try {
+  await sendOrderAlert(order);
+  console.log("Email sent successfully");
+} catch (err) {
+  console.error("Email failed:", err);
+}
     
     res.status(201).json(order);
   } catch (error) {
