@@ -7,8 +7,10 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS
   }
 });
-console.log("Sending email...");
+
 const sendOrderAlert = async (order) => {
+  console.log("Sending email...");
+
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: process.env.ADMIN_EMAIL,
@@ -20,6 +22,8 @@ const sendOrderAlert = async (order) => {
       <p>Status: ${order.orderStatus}</p>
     `
   });
+
+  console.log("Email sent successfully");
 };
 
 module.exports = { sendOrderAlert };
