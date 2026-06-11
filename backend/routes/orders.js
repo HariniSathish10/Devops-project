@@ -99,5 +99,60 @@ router.put('/:id/status', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+// Update order status (Admin)
+router.put('/:id/status', async (req, res) => {
+  try {
+    const { orderStatus } = req.body;
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { orderStatus, updatedAt: Date.now() },
+      { new: true }
+    );
+
+    if (orderStatus === 'Delivered') {
+      order.isDelivered = true;
+      order.deliveredAt = Date.now();
+      await order.save();
+    }
+
+    res.json(order);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
+// ADD THIS NEW ROUTE HERE
+router.put('/:id/cancel', verifyToken, async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    if (order.user.toString() !== req.userId) {
+      return res.status(403).json({ message: 'Not authorized' });
+    }
+
+    order.orderStatus = 'Cancelled';
+
+    order.statusHistory.push({
+      status: 'Cancelled',
+      date: new Date()
+    });
+
+    await order.save();
+
+    res.json({
+      success: true,
+      message: 'Order cancelled successfully',
+      order
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;
