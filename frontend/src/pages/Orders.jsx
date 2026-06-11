@@ -10,6 +10,20 @@ const Orders = () => {
 
   useEffect(() => {
     fetchOrders();
+    const cancelOrder = async (orderId) => {
+  try {
+    await fetch(`http://localhost:5000/api/orders/${orderId}/cancel`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+
+    fetchOrders(); // refresh orders
+  } catch (error) {
+    console.error('Error cancelling order:', error);
+  }
+};
   }, []);
 
   const fetchOrders = async () => {
@@ -180,6 +194,15 @@ const Orders = () => {
                     <span>Total</span>
                     <span className="text-primary-600">{formatPrice(order.totalPrice)}</span>
                   </div>
+                  {order.orderStatus !== 'Delivered' &&
+ order.orderStatus !== 'Cancelled' && (
+  <button
+    onClick={() => cancelOrder(order._id)}
+    className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+  >
+    Cancel Order
+  </button>
+)}
                 </div>
               </motion.div>
             ))}
