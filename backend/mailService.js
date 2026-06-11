@@ -9,21 +9,27 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendOrderAlert = async (order) => {
-  console.log("Sending email...");
-  console.log("sendOrderAlert function called");
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: process.env.ADMIN_EMAIL,
-    subject: "New Order Received",
-    html: `
-      <h2>New Order Received</h2>
-      <p>Tracking Number: ${order.trackingNumber}</p>
-      <p>Total Amount: ₹${order.totalPrice}</p>
-      <p>Status: ${order.orderStatus}</p>
-    `
-  });
+  try {
+    console.log("Sending email...");
+    console.log("sendOrderAlert function called");
 
-  console.log("Email sent successfully");
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.ADMIN_EMAIL,
+      subject: "New Order Received",
+      html: `
+        <h2>New Order Received</h2>
+        <p>Tracking Number: ${order.trackingNumber}</p>
+        <p>Total Amount: ₹${order.totalPrice}</p>
+        <p>Status: ${order.orderStatus}</p>
+      `
+    });
+
+    console.log("Email sent successfully");
+    console.log(info.response);
+
+  } catch (error) {
+    console.error("Email Error:", error);
+  }
 };
-
 module.exports = { sendOrderAlert };
