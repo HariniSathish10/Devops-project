@@ -16,7 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Database Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/indian-shopping')
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/indian-shopping'
+)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('MongoDB Connection Error:', err));
 
