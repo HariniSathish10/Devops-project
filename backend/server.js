@@ -1,14 +1,14 @@
-import dotenv from "dotenv";
-dotenv.config();
-const express = require('express');
+require("dotenv").config();
+
+console.log("EMAIL:", process.env.EMAIL_USER);
+console.log("PASS LENGTH:", process.env.EMAIL_PASS?.length); 
+
+const express = require("express");
 const app = express();
 
 const path = require("path");
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const mongoose = require("mongoose");
+const cors = require("cors");
 
 // Middleware
 app.use(cors());
